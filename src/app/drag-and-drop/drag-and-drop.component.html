@@ -1,0 +1,23 @@
+<form [formGroup]="frm">
+    <div class="upload-file__container"
+        (click)="fileInput.click()"
+        appDragDrop
+        (onFileDropped)="uploadFile($event)">
+        <div class="upload-file__text">{{statusFileText}}</div>
+        <input hidden
+            type="file"
+            #fileInput
+            formControlName="file"
+            uploadFile
+            (change)="uploadFile($event.target.files)">
+    </div>
+</form>
+
+<table *ngIf="files" class="table">
+    <tr>
+        <th *ngFor="let key of tableHeader">{{key}}</th>
+    </tr>
+    <tr *ngFor="let row of files">
+        <td *ngFor="let key of tableHeader">{{ row[key] }}</td>
+    </tr>
+</table>
